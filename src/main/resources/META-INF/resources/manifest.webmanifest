@@ -1,0 +1,8 @@
+{
+  "name": "Reactive CRM",
+  "short_name": "CRM",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "description": "Vaadin reactive CRM with LDAP auth",
+  "icons": []
+}
