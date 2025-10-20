@@ -1,0 +1,28 @@
+# Maven
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+
+# Vaadin / Node
+/node/
+/frontend/generated/
+/.vaadin/
+/pnpm-lock.yaml
+/package-lock.json
+/.pnpm-store/
+/.npm/
+/.cache/
+/.vite/
+
+# IDE
+/.idea/
+*.iml
+*.iws
+*.ipr
+.classpath
+.project
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db

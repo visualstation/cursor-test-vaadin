@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: vaadin-ldap-app
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  r2dbc:
+    url: r2dbc:h2:mem:///testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password: ""
+  sql:
+    init:
+      mode: always
+  ldap:
+    embedded:
+      base-dn: dc=example,dc=com
+      ldif: classpath:test-server.ldif
+      port: 8389
+
+vaadin:
+  launch-browser: false
+  allowed-package-names: com.example.vaadinldap

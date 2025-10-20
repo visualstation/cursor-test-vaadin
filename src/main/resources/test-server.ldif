@@ -1,0 +1,54 @@
+dn: dc=example,dc=com
+objectclass: top
+objectclass: domain
+objectclass: extensibleObject
+dc: example
+
+# People
+
+dn: ou=people,dc=example,dc=com
+objectclass: top
+objectclass: organizationalUnit
+ou: people
+
+# Groups
+
+dn: ou=groups,dc=example,dc=com
+objectclass: top
+objectclass: organizationalUnit
+ou: groups
+
+# Users
+
+dn: uid=user,ou=people,dc=example,dc=com
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: Demo User
+sn: User
+uid: user
+userPassword: {noop}password
+mail: user@example.com
+
+# Admin
+
+dn: uid=admin,ou=people,dc=example,dc=com
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+cn: Admin User
+sn: Admin
+uid: admin
+userPassword: {noop}admin
+mail: admin@example.com
+
+# Group membership
+
+dn: cn=users,ou=groups,dc=example,dc=com
+objectClass: top
+objectClass: groupOfUniqueNames
+cn: users
+uniqueMember: uid=user,ou=people,dc=example,dc=com
+uniqueMember: uid=admin,ou=people,dc=example,dc=com

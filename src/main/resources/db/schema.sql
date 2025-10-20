@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS customer (
+  id IDENTITY PRIMARY KEY,
+  first_name VARCHAR(128) NOT NULL,
+  last_name VARCHAR(128) NOT NULL,
+  email VARCHAR(256) NOT NULL,
+  phone VARCHAR(64)
+);
