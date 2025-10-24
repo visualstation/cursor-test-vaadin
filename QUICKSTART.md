@@ -26,30 +26,62 @@ Once the application is running:
 
 ## 📊 Using the Application
 
+### Navigation
+
+The application has three main sections:
+
+1. **Intervention Logs** (Home) - View all intervention logs
+2. **Sessions** - View all customer sessions
+3. **Customers** - View all customers
+
+Use the navigation buttons at the top to switch between views.
+
 ### Main Features
 
-1. **View Logs**: All intervention logs are displayed in a sortable table
-   - Click on column headers to sort by that column
-   - The table displays:
-     - Date & Time
-     - Client ID
-     - Username
-     - Description
-     - Duration (seconds)
-     - Billed Duration (seconds)
+#### Customers View (`/customers`)
+- View all registered customers
+- See customer details (code, name, email, phone, address)
+- See how many sessions each customer has
 
-2. **Filter Logs**: Use the search box at the top to filter by:
-   - Username (e.g., "krs-quentin@ad")
-   - Description (e.g., "Email", "Dépannage")
+#### Sessions View (`/sessions`)
+- View all sessions across all customers
+- See session details (ID, customer, start/end time, status, description)
+- See how many intervention logs are in each session
+- Filter by status (ACTIVE, COMPLETED, CANCELLED)
 
-3. **Refresh**: Click the "Refresh" button to reload the data
+#### Intervention Logs View (Home `/`)
+- View all intervention logs organized by customer and session
+- Sortable columns for easy data analysis
+- Filter by username or description
+- All logs are linked to their respective sessions and customers
 
-4. **Logout**: Click the "Logout" button in the top-right corner
+### Features per View
+
+**Intervention Logs:**
+- **Filter**: Search box to filter by username or description
+- **Refresh**: Reload data from the database
+- **Sort**: Click column headers to sort
+
+**Sessions & Customers:**
+- **View Details**: See all related information
+- **Sort**: Click column headers to sort
+- **Navigate**: Click navigation buttons to switch views
+
+**All Views:**
+- **Logout**: Available in the top-right corner
 
 ## 📦 What's Included
 
 ### Sample Data
-The application comes pre-loaded with **80+ intervention logs** from KRS Logistics, spanning from April to October 2025.
+The application comes pre-loaded with:
+- **3 Customers**: KRS Logistics, Acme Corporation, TechCorp Solutions
+- **7 Sessions**: Monthly IT support sessions for KRS Logistics (April-October 2025)
+- **80+ Intervention Logs**: All linked to sessions, spanning from April to October 2025
+
+### Data Model
+- **Customers** have multiple **Sessions**
+- **Sessions** belong to a **Customer** and contain multiple **Intervention Logs**
+- **Intervention Logs** are linked to a **Session** (and indirectly to a Customer)
 
 ### Technologies
 - **Spring Boot 3.2.0**: Backend framework
@@ -103,11 +135,15 @@ Main configuration is in `src/main/resources/application.properties`:
 
 ## 📝 Customization
 
-### Adding More Logs
-Edit `DataInitializer.java` and add more log entries to the `logData` array.
+### Adding More Data
+
+Edit `DataInitializer.java` to add:
+- **Customers**: Add to `createSampleCustomers()` method
+- **Sessions**: Add to `createSampleSessions()` method
+- **Logs**: Add to the `logData` array in `loadSampleLogs()`
 
 ### Changing Users
-Edit `DataInitializer.java` to modify the default users or add new ones.
+Edit `DataInitializer.java` in the `run()` method to modify the default users or add new ones.
 
 ### Using a Different Database
 Update `application.properties` to use PostgreSQL, MySQL, etc.:

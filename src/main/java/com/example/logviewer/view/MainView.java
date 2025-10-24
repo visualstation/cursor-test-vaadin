@@ -44,6 +44,7 @@ public class MainView extends VerticalLayout {
         
         add(
             createHeader(),
+            createNavigation(),
             createToolbar(),
             grid
         );
@@ -68,6 +69,23 @@ public class MainView extends VerticalLayout {
         return header;
     }
     
+    private HorizontalLayout createNavigation() {
+        Button logsButton = new Button("Intervention Logs");
+        logsButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        
+        Button sessionsButton = new Button("Sessions");
+        sessionsButton.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("sessions")));
+        
+        Button customersButton = new Button("Customers");
+        customersButton.addClickListener(e -> getUI().ifPresent(ui -> ui.navigate("customers")));
+        
+        HorizontalLayout nav = new HorizontalLayout(logsButton, sessionsButton, customersButton);
+        nav.setAlignItems(Alignment.CENTER);
+        nav.setSpacing(true);
+        
+        return nav;
+    }
+    
     private HorizontalLayout createToolbar() {
         filterText.setPlaceholder("Filter by username or description...");
         filterText.setClearButtonVisible(true);
@@ -88,6 +106,18 @@ public class MainView extends VerticalLayout {
         grid.addClassName("intervention-log-grid");
         grid.setSizeFull();
         grid.addThemeVariants(GridVariant.LUMO_ROW_STRIPES, GridVariant.LUMO_COMPACT);
+        
+        grid.addColumn(log -> log.getSession().getCustomer().getName())
+            .setHeader("Customer")
+            .setSortable(true)
+            .setWidth("150px")
+            .setFlexGrow(0);
+        
+        grid.addColumn(log -> log.getSession().getSessionId())
+            .setHeader("Session ID")
+            .setSortable(true)
+            .setWidth("130px")
+            .setFlexGrow(0);
         
         grid.addColumn(log -> log.getTimestamp().format(DATE_FORMATTER))
             .setHeader("Date & Time")

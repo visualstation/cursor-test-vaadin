@@ -18,6 +18,10 @@ public class InterventionLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "session_id", nullable = false)
+    private Session session;
+    
     @Column(nullable = false)
     private LocalDateTime timestamp;
     
@@ -35,4 +39,15 @@ public class InterventionLog {
     
     @Column(nullable = false)
     private Integer billedDuration;
+    
+    public InterventionLog(Session session, LocalDateTime timestamp, String clientId, String username, 
+                          String description, Integer duration, Integer billedDuration) {
+        this.session = session;
+        this.timestamp = timestamp;
+        this.clientId = clientId;
+        this.username = username;
+        this.description = description;
+        this.duration = duration;
+        this.billedDuration = billedDuration;
+    }
 }
